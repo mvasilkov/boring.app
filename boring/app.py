@@ -1,17 +1,15 @@
 from fastapi import FastAPI
-from pydantic import BaseModel
 
-
-class SshConnectionDetails(BaseModel):
-    host: str
-    port: int
-    username: str
-    password: str
-
+from .state import State, app_state
 
 app = FastAPI()
 
 
-@app.get('/')
+@app.on_event('startup')
+async def startup():
+    pass
+
+
+@app.get('/', response_model=State)
 async def index():
-    return {}
+    return app_state
