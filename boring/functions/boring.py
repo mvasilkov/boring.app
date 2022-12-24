@@ -9,11 +9,11 @@ class BoringFunction:
 
     def __call__(self):
         if self.endpoint.localhost:
-            return self.handle_localhost()
+            return self.handle_local()
 
         return self.handle_ssh()
 
-    async def handle_localhost(self):
+    async def handle_local(self):
         raise NotImplementedError
 
     async def handle_ssh(self):
