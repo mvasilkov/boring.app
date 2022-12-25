@@ -18,3 +18,11 @@ class BoringFunction:
 
     async def handle_ssh(self):
         raise NotImplementedError
+
+
+def coerce_string(value):
+    if isinstance(value, str):
+        return value
+    if isinstance(value, bytes):
+        return value.decode('utf-8')
+    return None

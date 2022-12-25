@@ -1,11 +1,10 @@
 from pydantic import BaseModel
 
-from .models import SshConnectionDetails, SshEndpoint
+from .models import SshEndpoint
 
 
 class State(BaseModel):
     endpoints: list[SshEndpoint] = []
-    connections: list[SshConnectionDetails] = []
 
 
 def initialize_state():

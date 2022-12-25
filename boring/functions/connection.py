@@ -14,6 +14,7 @@ class ConnectSsh(BoringFunction):
         conn_details.client_connection = await asyncssh.connect(
             conn_details.host,
             conn_details.port,
+            known_hosts=None,
             username=conn_details.username,
             password=conn_details.password,
         )
