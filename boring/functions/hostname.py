@@ -1,7 +1,9 @@
 import socket
 
+from asyncssh.connection import SSHClientConnection
+
 from .boring import BoringFunction, coerce_string
-from .connection import ConnectSsh
+from .decorators import want_client_connection
 
 
 class GetHostname(BoringFunction):
@@ -9,14 +11,8 @@ class GetHostname(BoringFunction):
         self.endpoint.hostname = socket.gethostname()
         return self.endpoint.hostname
 
-    async def handle_ssh(self):
-        if (conn_details := self.endpoint.connection_details) is None:
-            raise ValueError('Missing connection details')
-
-        if (client_conn := conn_details.client_connection) is None:
-            connect_ssh = ConnectSsh(self.endpoint)
-            client_conn = await connect_ssh()
-
+    @want_client_connection
+    async def handle_ssh(self, client_conn: SSHClientConnection):
         result = await client_conn.run('hostname')
         self.endpoint.hostname = coerce_string(result.stdout)
         return self.endpoint.hostname

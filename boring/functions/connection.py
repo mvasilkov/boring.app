@@ -1,16 +1,16 @@
 import asyncssh
 
+from ..models import SshConnectionDetails
 from .boring import BoringFunction
+from .decorators import want_connection_details
 
 
 class ConnectSsh(BoringFunction):
     async def handle_local(self):
         pass
 
-    async def handle_ssh(self):
-        if (conn_details := self.endpoint.connection_details) is None:
-            raise ValueError('Missing connection details')
-
+    @want_connection_details
+    async def handle_ssh(self, conn_details: SshConnectionDetails):
         conn_details.client_connection = await asyncssh.connect(
             conn_details.host,
             conn_details.port,
