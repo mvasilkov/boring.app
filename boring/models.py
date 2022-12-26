@@ -7,10 +7,7 @@ class SshConnectionDetails(BaseModel):
     port: int = 22
     username: str
     password: str | None = None
-    client_connection: SSHClientConnection | None = None
-
-    class Config:
-        arbitrary_types_allowed = True
+    _client_connection: SSHClientConnection | None = None
 
 
 class SshEndpoint(BaseModel):
