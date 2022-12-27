@@ -8,7 +8,7 @@ class State(BaseModel):
 
 
 def initialize_state():
-    state = State(endpoints=[SshEndpoint(title='localhost', localhost=True)])
+    state = State(endpoints=[SshEndpoint(parent=None, title='localhost', localhost=True)])
     return state
 
 
