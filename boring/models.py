@@ -15,6 +15,9 @@ class SshConnectionDetails(BaseModel):
     _client_key: bytes | None = None
     _client_connection: SSHClientConnection | None = None
 
+    class Config:
+        underscore_attrs_are_private = True
+
 
 class SshEndpoint(BaseModel):
     pk: str = Field(default_factory=generate)

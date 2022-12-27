@@ -22,7 +22,7 @@ class BoringFunction:
 
 def coerce_string(value):
     if isinstance(value, str):
-        return value
+        return value.rstrip('\n')
     if isinstance(value, bytes):
-        return value.decode('utf-8')
+        return value.decode('utf-8').rstrip('\n')
     return None
