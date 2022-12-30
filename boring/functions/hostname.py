@@ -2,7 +2,8 @@ import socket
 
 from asyncssh.connection import SSHClientConnection
 
-from .boring import BoringFunction, coerce_string
+from ..utils import coerce_string
+from .boring import BoringFunction
 from .decorators import want_client_connection
 
 
